@@ -18,7 +18,7 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
         elif g == "categories":
             category = gui_info["categories"]
 
-    geocoding_url = f"https://api.geoapify.com/v1/geocode/search?city={city}&state={state}&format=json&apiKey={GEOAPIFY_APIKEY}
+    geocoding_url = f"https://api.geoapify.com/v1/geocode/search?city={city}&state={state}&format=json&apiKey={GEOAPIFY_APIKEY}"
     response = requests.get(geocoding_url, headers=headers).json()
     geocoding_data = response['results']
 
@@ -80,10 +80,10 @@ for ld in l_d:
 
     for loc in location_properties.keys():
         if loc == "address_line1":
-            value = location_properties[l]
+            value = location_properties[loc]
             location["name"] = value
         elif loc == "address_line2":
-            value = location_properties[l]
+            value = location_properties[loc]
             location["address"] = value
 
     locations.append(location.copy())
