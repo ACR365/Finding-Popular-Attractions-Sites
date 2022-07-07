@@ -1,0 +1,21 @@
+{
+// Configure your Run and Preview buttons here.
+
+// Run button configuration
+  "commands": 
+  {
+        "Node version": "node --version"
+  },
+     "commands": {
+        "Run": "python3 {{filepath}}"
+    },
+
+
+// Preview button configuration
+  "preview": {
+        "Viewer": "https://{{domain3000}}/",
+        "Project Index (static)": "https://{{domain}}/{{index}}",
+        "Current File (static)": "https://{{domain}}/{{filepath}}",
+        "Box URL": "https://{{domain3000}}/"
+  }
+}
