@@ -43,7 +43,6 @@ class GUI:
             elif event == 'Submit':
                 city, state, category = values['city'], values['state'], values['category']
                 if city and state and category:
-
                     cls.geoapify_keys = {
                         "city": values['city'].lower(),
                         "state": values['state'].lower(),
