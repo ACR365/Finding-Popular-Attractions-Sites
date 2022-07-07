@@ -44,6 +44,10 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
 
     radius = "16100"
     place_url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{lon},{lat},{radius}&&apiKey={GEOAPIFY_APIKEY}" 
+<<<<<<< HEAD
+=======
+    print(place_url)
+>>>>>>> b18061cb2dc21231ffb48f3a8700c311746a3018
 
     return place_url
     
@@ -95,6 +99,7 @@ locations = []
 for ld in l_d:
     location = {}
     location_check = {"name": "", "address": "", "website": ""}
+<<<<<<< HEAD
 
     location_properties = ld["properties"]
 
@@ -116,3 +121,20 @@ for l in locations:
 
 
     
+=======
+
+    location_properties = ld["properties"]
+
+    for l in location_properties.keys():
+        if l == "address_line1":
+            value = location_properties[l]
+            location["name"] = value
+        elif l == "address_line2":
+            value = location_properties[l]
+            location["address"] = value
+        
+    locations.append(location.copy())
+
+for l in locations:
+    print (l)
+>>>>>>> b18061cb2dc21231ffb48f3a8700c311746a3018
