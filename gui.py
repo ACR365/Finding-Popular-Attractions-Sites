@@ -11,8 +11,7 @@ class GUI:
         "attraction-sites": "tourism",
         "museums": "entertainment.museum",
         "leisure-parks": "leisure.park",
-        "heritage": "heritage",
-        "": ""
+        "heritage": "heritage"
     }
     geoapify_keys = {}
 

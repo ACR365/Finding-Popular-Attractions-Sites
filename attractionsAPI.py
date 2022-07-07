@@ -15,8 +15,8 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
             city = gui_info["city"]
         elif g == "state":
             state = gui_info["state"]
-        elif g == "category":
-            category = gui_info["category"]
+        elif g == "categories":
+            category = gui_info["categories"]
 
     geocoding_url = "https://api.geoapify.com/v1/geocode/search?city=" + city + "state=" + state + "&format=json&apiKey=" + GEOAPIFY_APIKEY
 
@@ -44,9 +44,9 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
 
 
     radius = "16100"
-    places_url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{lon},{lat},{radius}&&apiKey={GEOAPIFY_APIKEY}" 
+    place_url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{lon},{lat},{radius}&&apiKey={GEOAPIFY_APIKEY}" 
 
-    return places_url
+    return place_url
     
 
 
@@ -83,14 +83,36 @@ headers = CaseInsensitiveDict()
 headers["Accept"] = "application/json"
 
 place_url = geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers)
-print(place_url)
+location_data = requests.get(place_url).json()
+l_d = location_data["features"]
 
-location_data = requests.get(places_url).json()
+locations = []
+for ld in l_d:
+    location = {"name": "", "address": ""}
+    location_check = location
 
-i = 0
-location_values = location_data.values()
-while i != len(location_values):
-    print(l)
-"""
+    location_properties = ld["properties"]
+    
+    for l in location_properties.keys():
+        if l == "address_line1":
+            value = location_properties[l]
+            location["name"] = value
+            print (location_properties["name"])
+        elif l == "address_line2":
+            print("Cool")
+            value = location_properties[l]
+            location["address"] = value
+            #print (location_properties["address"])
+    
+        if location["name"] != "" and location["address"] != "":
+            break
+
+    if location != location_check:
+        locations.append(location)
+
+#pprint.pprint(location)
+
+        
+
 
     
