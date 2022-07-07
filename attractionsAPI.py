@@ -18,8 +18,7 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
         elif g == "categories":
             category = gui_info["categories"]
 
-    geocoding_url = "https://api.geoapify.com/v1/geocode/search?city=" + city + "state=" + state + "&format=json&apiKey=" + GEOAPIFY_APIKEY
-
+    geocoding_url = "https://api.geoapify.com/v1/geocode/search?city=" + city + "&state=" + state + "&format=json&apiKey=" + GEOAPIFY_APIKEY
     response = requests.get(geocoding_url, headers=headers).json()
     geocoding_data = response['results']
 
@@ -71,9 +70,14 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
 #Main Function
 GEOAPIFY_APIKEY = 'ccc449b727344041a2a3038f3eb7e098'
 
+
 gui = gui.GUI()
 gui.setup()
 gui_info = gui.get_keys()
+
+if gui_info == {}:
+    raise Exception("Error: Missing one or more fields")
+
 
 city = ""
 state = ""
@@ -84,33 +88,29 @@ headers["Accept"] = "application/json"
 
 place_url = geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers)
 location_data = requests.get(place_url).json()
+
 l_d = location_data["features"]
 
 locations = []
 for ld in l_d:
-    location = {"name": "", "address": ""}
-    location_check = location
+    location = {}
+    location_check = {"name": "", "address": "", "website": ""}
 
     location_properties = ld["properties"]
-    
+
     for l in location_properties.keys():
         if l == "address_line1":
             value = location_properties[l]
             location["name"] = value
-            print (location_properties["name"])
         elif l == "address_line2":
-            print("Cool")
             value = location_properties[l]
             location["address"] = value
-            #print (location_properties["address"])
-    
-        if location["name"] != "" and location["address"] != "":
-            break
+        
+    locations.append(location.copy())
 
-    if location != location_check:
-        locations.append(location)
+for l in locations:
+    print (l)
 
-#pprint.pprint(location)
 
         
 
