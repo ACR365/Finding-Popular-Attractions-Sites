@@ -85,7 +85,7 @@ for ld in l_d:
             value = location_properties[loc]
             location["name"] = value
         elif loc == "address_line2":
-            value = location_properties[loc]
+            value = location_properties[loc].replace(", United States of America","")
             location["address"] = value
 
     locations.append(location.copy())
