@@ -28,7 +28,7 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
     i = 0
     while i != len(geocoding_data):
         coord_finder = geocoding_data[i]
-    
+
         for j in coord_finder:
             if j == 'lon' or j == 'lat':
                 if j == 'lon':
@@ -44,36 +44,13 @@ def geocoding(gui_info, city, state, category, GEOAPIFY_APIKEY, headers):
 
     radius = "16100"
     place_url = f"https://api.geoapify.com/v2/places?categories={category}&filter=circle:{lon},{lat},{radius}&&apiKey={GEOAPIFY_APIKEY}" 
-<<<<<<< HEAD
-=======
-    print(place_url)
->>>>>>> b18061cb2dc21231ffb48f3a8700c311746a3018
 
     return place_url
-    
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
 #Main Function
 GEOAPIFY_APIKEY = 'ccc449b727344041a2a3038f3eb7e098'
-
 
 gui = gui.GUI()
 gui.setup()
@@ -99,7 +76,6 @@ locations = []
 for ld in l_d:
     location = {}
     location_check = {"name": "", "address": "", "website": ""}
-<<<<<<< HEAD
 
     location_properties = ld["properties"]
 
@@ -110,31 +86,8 @@ for ld in l_d:
         elif l == "address_line2":
             value = location_properties[l]
             location["address"] = value
-        
+
     locations.append(location.copy())
 
 for l in locations:
     print (l)
-
-
-        
-
-
-    
-=======
-
-    location_properties = ld["properties"]
-
-    for l in location_properties.keys():
-        if l == "address_line1":
-            value = location_properties[l]
-            location["name"] = value
-        elif l == "address_line2":
-            value = location_properties[l]
-            location["address"] = value
-        
-    locations.append(location.copy())
-
-for l in locations:
-    print (l)
->>>>>>> b18061cb2dc21231ffb48f3a8700c311746a3018
