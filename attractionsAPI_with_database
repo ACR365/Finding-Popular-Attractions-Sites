@@ -100,3 +100,5 @@ df.to_sql('results',con = engine,if_exists = 'replace',index = False)
 query = engine.execute('SELECT * FROM results;').fetchall()
 #print(pd.DataFrame(query))
 print(df)
+gui.display_results(df)
+
