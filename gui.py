@@ -45,7 +45,6 @@ class GUI:
             elif event == 'Submit':
                 city, state, category = values['city'], values['state'], values['category']
                 if city and state and category:
-
                     cls.geoapify_keys = {
                         "city": values['city'].lower(),
                         "state": values['state'].lower(),
@@ -62,3 +61,26 @@ class GUI:
     @classmethod
     def get_keys(cls):
         return cls.geoapify_keys
+    
+    def display_results(self, data_frame):
+        headings = ['name', 'address']
+        values = data_frame.values.tolist()
+
+        sg.theme("DarkBlue3")
+        sg.set_options(font=("Courier New", 12))
+        layout = [
+            [sg.Column([[sg.Image("background.png", size=(100, 100))]], justification='center')],
+            [sg.Column([[sg.Text('Here\'s some points of interest we found for you :) ',
+                                font=("Lucida", 11), justification='right')]], justification='center')],
+            [sg.Table(values=values, headings=headings,
+                    max_col_width=100)],
+            [sg.Column([[sg.Button('Close')]], justification='center')],
+        ]
+
+        # Create the window
+        sg.change_look_and_feel('BluePurple')
+        window = sg.Window("Trip Advisor", layout, margins=(0, 0), element_padding=(10, 10))
+
+        # event
+        event, values = window.read()
+        window.close()
