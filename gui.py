@@ -67,7 +67,7 @@ class GUI:
         sg.theme("DarkBlue3")
         sg.set_options(font=("Courier New", 12))
         layout = [
-            [sg.Column([[sg.Image("background.png", size=(100, 100))]], justification='center')],
+            [sg.Column([[sg.Image("back.png", size=(100, 100))]], justification='center')],
             [sg.Column([[sg.Text('Here\'s some points of interest we found for you :) ',
                                 font=("Lucida", 11), justification='right')]], justification='center')],
             [sg.Table(values=values, headings=headings,
