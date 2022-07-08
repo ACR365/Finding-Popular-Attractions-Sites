@@ -4,7 +4,7 @@ import PySimpleGUI as sg
 
 class GUI:
     __categories__ = ["hotels", "restaurants", "attraction-sites",
-                      "museums", "leisure-parks", "heritage"]
+                      "museums", "leisure-parks", "heritage", "shops", "sports"]
     __geoapify_categories_keymap__ = {
         "hotels": "accommodation.hotel",
         "restaurants": "catering",
@@ -12,6 +12,8 @@ class GUI:
         "museums": "entertainment.museum",
         "leisure-parks": "leisure.park",
         "heritage": "heritage",
+        "shops": "commerical",
+        "sports": "sport",
         "": ""
     }
     geoapify_keys = {}
